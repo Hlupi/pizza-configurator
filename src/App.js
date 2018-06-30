@@ -12,10 +12,7 @@ class App extends Component {
         </header>
 
         <main>
-
-          <h1>Feel free to make your own pizza:</h1>
           <PizzaContainer />
-
         </main>
 
       </div>

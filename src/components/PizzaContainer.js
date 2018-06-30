@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import Base from './Base'
 import Sauce from './Sauce'
 import Toppings from './Toppings'
-import Price from './Price'
+
+
 
 
 class PizzaContainer extends PureComponent {
@@ -13,7 +14,8 @@ class PizzaContainer extends PureComponent {
         <Base />
         <Sauce />
         <Toppings />
-        <Price />
+
+
 
 
 
