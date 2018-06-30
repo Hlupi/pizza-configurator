@@ -1,13 +1,21 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 
+const toppingTypes = [
+  "Pineapple",
+  "Corn",
+  "Olives (green)",
+  "Red union",
+  "Spinach",
+  "Cherry tomatoes",
+  "Chicken"
+]
 
 class Toppings extends PureComponent {
   render() {
-    return (
-      <div>
-        <form>
+    return (<div>
+      {/* <form>
           <label>
-            Pick a sauce:
+            Pick up to 3 toppings:
             <select>
               <option value ="Pineapple">Pineapple</option>
               <option value ="Corn">Corn</option>
@@ -18,9 +26,23 @@ class Toppings extends PureComponent {
               <option value="Chicken">Chicken</option>
             </select>
           </label>
-        </form>
+        </form> */
+      }
+
+      <div>
+        <label className="form-label">Pick up to 3 toppings:</label>
+        <div className="checkbox-group">
+          {
+            toppingTypes.map(toppingType => {
+              return (<label key={toppingType} className="form-label capitalize">
+                <input className="form-checkbox" name={toppingType} value={toppingType} type="checkbox"/> {toppingType}
+              </label>);
+            })
+          }
+        </div>
       </div>
-    );
+
+    </div>);
   }
 }
 
