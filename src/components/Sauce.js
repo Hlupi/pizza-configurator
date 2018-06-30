@@ -40,16 +40,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, { addSauce })(Sauce)
-
-{/* <form>
-  <label>
-    Pick a sauce:
-    <select onChange={this.handleChange}>
-      <option value ="White sauce">White sauce</option>
-      <option value ="Red sauce">Red sauce</option>
-      <option value ="Double red sauce">Double red sauce € 1,00</option>
-      <option value ="Mix it up">Mix it up € 1,50</option>
-
-    </select>
-  </label>
-</form> */}

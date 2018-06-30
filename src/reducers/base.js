@@ -1,4 +1,4 @@
-import { ADD_BASE, ADD_SAUCE } from '../actions/index'
+import { ADD_BASE, ADD_SAUCE, ADD_TOPPING } from '../actions/index'
 
 const initialState = {
   base: '',
@@ -20,6 +20,18 @@ export default function(state = initialState, action = {}) {
       ...state,
       sauce: state.sauce = action.payload
     }
+  case ADD_TOPPING:
+    if (state.topping.length < 3) {
+      return {
+        ...state,
+        topping: state.topping.concat(action.payload)
+      }
+    } else {
+      alert("You may only add 3 toppings")
+      return {...state}
+    }
+
+
   default:
     return state
   }

@@ -1,4 +1,6 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux'
+import { addTopping } from '../actions/index'
 
 const toppingTypes = [
   "Pineapple",
@@ -11,27 +13,18 @@ const toppingTypes = [
 ]
 
 class Toppings extends PureComponent {
+
+  handleOnSelect = (event) => {
+    console.log("THIS IS MY HANDLE CHANGE topping BEING CALLED")
+    console.log(event.target.value)
+    this.props.addTopping(event.target.value)
+  }
+
   render() {
     return (<div>
-      {/* <form>
-          <label>
-            Pick up to 3 toppings:
-            <select>
-              <option value ="Pineapple">Pineapple</option>
-              <option value ="Corn">Corn</option>
-              <option value ="Olives (green)">Olives (green)</option>
-              <option value ="Red union">Red union</option>
-              <option value="Spinach">Spinach</option>
-              <option value="Cherry tomatoes">Cherry tomatoes</option>
-              <option value="Chicken">Chicken</option>
-            </select>
-          </label>
-        </form> */
-      }
-
       <div>
         <label className="form-label">Pick up to 3 toppings:</label>
-        <div className="checkbox-group">
+        <div className="checkbox-group" onChange={this.handleOnSelect}>
           {
             toppingTypes.map(toppingType => {
               return (<label key={toppingType} className="form-label capitalize">
@@ -46,4 +39,8 @@ class Toppings extends PureComponent {
   }
 }
 
-export default Toppings;
+const mapStateToProps = (state) => {
+  return {topping: state.topping}
+}
+
+export default connect(mapStateToProps, { addTopping })(Toppings)
