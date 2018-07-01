@@ -41,7 +41,9 @@ class Toppings extends PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  return {topping: state.topping}
+  return {
+    topping: state.topping
+  }
 }
 
 export default connect(mapStateToProps, { addTopping })(Toppings)

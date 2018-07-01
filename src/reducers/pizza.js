@@ -1,11 +1,11 @@
-import { ADD_BASE, ADD_SAUCE, ADD_TOPPING } from '../actions/index'
-import { baseCost, sauceCost, toppingCost } from './PizzaOptionsPrices'
+import { ADD_BASE, ADD_SAUCE, ADD_TOPPING, ADD_TURBO_DELIEVERY } from '../actions/index'
+import { baseCost, sauceCost, toppingCost, turboCost } from './PizzaOptionsPrices'
 
 const initialState = {
   base: '',
   sauce: '',
   topping: [],
-  turbo: false,
+  turbo: '',
   price: 0
 }
 
@@ -24,6 +24,7 @@ export default function(state = initialState, action = {}) {
       sauce: state.sauce = action.payload,
       price: state.price += sauceCost[action.payload]
     }
+
   case ADD_TOPPING:
     if (state.topping.length < 3) {
       return {
@@ -35,6 +36,14 @@ export default function(state = initialState, action = {}) {
     else {
       alert("You may only add 3 toppings")
       return {...state}
+    }
+
+  case ADD_TURBO_DELIEVERY:
+    return {
+      ...state,
+      turbo: state.turbo = action.payload,
+      price: state.price += state.price * turboCost[action.payload]
+
     }
   default:
     return state

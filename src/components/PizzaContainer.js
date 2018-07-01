@@ -3,6 +3,7 @@ import Base from './Base'
 import Sauce from './Sauce'
 import Toppings from './Toppings'
 import Price from './Price'
+import TurboDelievery from './TurboDelievery'
 
 
 
@@ -15,6 +16,7 @@ class PizzaContainer extends PureComponent {
         <Sauce />
         <Toppings />
         <Price />
+        <TurboDelievery />
 
       </div>
     );

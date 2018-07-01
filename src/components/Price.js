@@ -8,6 +8,7 @@ class Price extends PureComponent {
   render() {
 
     return (
+
       <div>
         <h3>Total:</h3>
         <p></p>

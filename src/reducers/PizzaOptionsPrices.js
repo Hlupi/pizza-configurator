@@ -21,3 +21,8 @@ export const toppingCost = {
   "Cherry tomatoes": 0.50,
   "Chicken": 0.50
 }
+
+export const turboCost = {
+  "Hell yeah!": .10,
+  "No, robots are here to kill us": 0 
+}
