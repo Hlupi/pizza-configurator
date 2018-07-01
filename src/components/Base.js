@@ -32,7 +32,9 @@ class Base extends PureComponent {
 
 
 const mapStateToProps = (state) => {
-  return {base: state.base}
+  return {
+    base: state.base,
+  }
 }
 
 export default connect(mapStateToProps, { addBase })(Base)

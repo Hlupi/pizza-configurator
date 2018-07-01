@@ -20,6 +20,7 @@ class Toppings extends PureComponent {
     this.props.addTopping(event.target.value)
   }
 
+
   render() {
     return (<div>
       <div>
@@ -28,13 +29,13 @@ class Toppings extends PureComponent {
           {
             toppingTypes.map(toppingType => {
               return (<label key={toppingType} className="form-label capitalize">
-                <input className="form-checkbox" name={toppingType} value={toppingType} type="checkbox"/> {toppingType}
+                <input className="form-checkbox" name={toppingType} value={toppingType}
+                  type="checkbox" /> {toppingType}
               </label>);
             })
           }
         </div>
       </div>
-
     </div>);
   }
 }
