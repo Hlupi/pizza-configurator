@@ -15,8 +15,9 @@ class PizzaContainer extends PureComponent {
         <Base />
         <Sauce />
         <Toppings />
-        <Price />
         <TurboDelievery />
+        <Price />
+
 
       </div>
     );

@@ -1,15 +1,19 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
-import { addTurboDelievery } from '../actions/index'
+import { addTurboDelievery, removeTurboDelievery } from '../actions/index'
 
-const delievryOptions = ["Hell yeah!", "No, robots are here to kill us"]
+const delievryOptions = ["Hell yeah!"]
 
 class TurboDelievery extends PureComponent {
 
   handleOnSelect = (event) => {
-    console.log("THIS IS MY HANDLE CHANGE turbo delievery BEING CALLED")
-    console.log(event.target.value)
-    this.props.addTurboDelievery(event.target.value)
+    // console.log("THIS IS MY HANDLE CHANGE turbo delievery BEING CALLED")
+    // console.log(event.target.value)
+    if(event.target.checked) {
+      this.props.addTurboDelievery(event.target.value)
+    } else {
+      this.props.removeTurboDelievery(event.target.value)
+    }
   }
 
 
@@ -20,7 +24,7 @@ class TurboDelievery extends PureComponent {
           <label>For only 10% on top of my order I would like the turbo-drone-delivery:</label>
           <div className="radio-group" onChange={this.handleOnSelect}> {
             delievryOptions.map(delievryOption => {
-              return (<label key={delievryOption}><input className="form-radio" name={delievryOption} value={delievryOption} type="radio" />{delievryOption}</label>)
+              return (<label key={delievryOption}><input className="form-checkbox" name={delievryOption} value={delievryOption} type="checkbox" />{delievryOption}</label>)
             })
           }
           </div>
@@ -32,8 +36,8 @@ class TurboDelievery extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    price: state.price
+    pizza: state.pizza
   }
 }
 
-export default connect(mapStateToProps, {addTurboDelievery})(TurboDelievery);
+export default connect(mapStateToProps, { addTurboDelievery, removeTurboDelievery })(TurboDelievery);

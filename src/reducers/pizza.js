@@ -1,12 +1,15 @@
-import { ADD_BASE, ADD_SAUCE, ADD_TOPPING, ADD_TURBO_DELIEVERY } from '../actions/index'
-import { baseCost, sauceCost, toppingCost, turboCost } from './PizzaOptionsPrices'
+import { ADD_BASE, ADD_SAUCE, ADD_TOPPING, REMOVE_TOPPING, ADD_TURBO_DELIEVERY, REMOVE_TURBO_DELIEVERY } from '../actions/index'
+import { baseCost, sauceCost, toppingCost, turboCost } from '../PizzaOptionsPrices'
 
 const initialState = {
   base: '',
+  basePrice: 0,
   sauce: '',
+  saucePrice: 0,
   topping: [],
+  toppinPrice: 0,
   turbo: '',
-  price: 0
+  turboPrice: 0
 }
 
 export default function(state = initialState, action = {}) {
@@ -15,14 +18,14 @@ export default function(state = initialState, action = {}) {
     return {
       ...state,
       base: state.base = action.payload,
-      price: state.price += baseCost[action.payload]
+      basePrice: state.basePrice = baseCost[action.payload]
     }
 
   case ADD_SAUCE:
     return {
       ...state,
       sauce: state.sauce = action.payload,
-      price: state.price += sauceCost[action.payload]
+      saucePrice: state.saucePrice = sauceCost[action.payload]
     }
 
   case ADD_TOPPING:
@@ -30,7 +33,7 @@ export default function(state = initialState, action = {}) {
       return {
         ...state,
         topping: state.topping.concat(action.payload),
-        price: state.price += toppingCost[action.payload]
+        toppinPrice: state.toppinPrice += toppingCost[action.payload]
       }
     }
     else {
@@ -38,11 +41,24 @@ export default function(state = initialState, action = {}) {
       return {...state}
     }
 
+  case REMOVE_TOPPING :
+    return {
+      ...state,
+      topping: state.topping.filter(topping => topping !== action.payload),
+      toppinPrice: state.toppinPrice -= toppingCost[action.payload]
+    }
+
   case ADD_TURBO_DELIEVERY:
     return {
       ...state,
       turbo: state.turbo = action.payload,
-      price: state.price += state.price * turboCost[action.payload]
+      turboPrice: state.turboPrice + turboCost[action.payload]
+    }
+  case REMOVE_TURBO_DELIEVERY:
+    return {
+      ...state,
+      turbo: state.turbo = action.payload,
+      turboPrice: state.turboPrice - turboCost[action.payload]
 
     }
   default:

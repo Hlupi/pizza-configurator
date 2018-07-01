@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
-import { addTopping } from '../actions/index'
+import { addTopping, removeTopping } from '../actions/index'
 
 const toppingTypes = [
   "Pineapple",
@@ -15,9 +15,13 @@ const toppingTypes = [
 class Toppings extends PureComponent {
 
   handleOnSelect = (event) => {
-    console.log("THIS IS MY HANDLE CHANGE topping BEING CALLED")
-    console.log(event.target.value)
-    this.props.addTopping(event.target.value)
+    // console.log("THIS IS MY HANDLE CHANGE topping BEING CALLED")
+    // console.log(event.target.value)
+    if(event.target.checked) {
+      this.props.addTopping(event.target.value)
+    } else {
+      this.props.removeTopping(event.target.value)
+    }
   }
 
 
@@ -42,8 +46,8 @@ class Toppings extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    topping: state.topping
+    pizza: state.pizza
   }
 }
 
-export default connect(mapStateToProps, { addTopping })(Toppings)
+export default connect(mapStateToProps, { addTopping, removeTopping })(Toppings)

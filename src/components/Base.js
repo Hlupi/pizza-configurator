@@ -7,8 +7,8 @@ const baseTypes = ["25cm NY Style", "30cm NY Style", "35cm NY Style", "20cm NY S
 class Base extends PureComponent {
 
   handleChange = (event) => {
-    console.log("THIS IS MY HANDLE CHANGE base BEING CALLED")
-    console.log(event.target.value)
+    // console.log("THIS IS MY HANDLE CHANGE base BEING CALLED")
+    // console.log(event.target.value)
     this.props.addBase(event.target.value)
   }
 
@@ -33,7 +33,7 @@ class Base extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    base: state.base,
+    pizza: state.pizza
   }
 }
 

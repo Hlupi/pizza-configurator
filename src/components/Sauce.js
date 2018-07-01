@@ -7,8 +7,8 @@ const sauceTypes = ["White sauce", "Red sauce", "Double red sauce", "Mix it up"]
 class Sauce extends PureComponent {
 
   handleChange = (event) => {
-    console.log("THIS IS MY HANDLE CHANGE sauce BEING CALLED")
-    console.log(event.target.value)
+    // console.log("THIS IS MY HANDLE CHANGE sauce BEING CALLED")
+    // console.log(event.target.value)
     this.props.addSauce(event.target.value)
   }
 
@@ -35,7 +35,7 @@ class Sauce extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    sauce: state.sauce
+    pizza: state.pizza
   }
 }
 
