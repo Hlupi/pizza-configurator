@@ -1,4 +1,5 @@
 This project was part of the Codaisseur Web Developmnet Bootcamp Programm and included the following requirements:
+
 Copy paste? Copy pasta? No! Copy Pizza!
 You’re asked to create a pizza configurator for NewAgePizza.com, a new and hip venture to get your pizza. It should be a single page that contains all the following elements.
 
