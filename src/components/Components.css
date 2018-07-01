@@ -1,0 +1,19 @@
+body {
+  font-family: Roboto;
+}
+
+.title {
+  letter-spacing: 0.1rem;
+}
+
+.optionSpacing {
+  margin: 10px auto
+}
+
+.contentSpacing {
+  margin: 5px auto 0 auto
+}
+
+#finalPrice {
+  color: #005b9f;
+}

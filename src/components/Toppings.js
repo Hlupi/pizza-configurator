@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { addTopping, removeTopping } from '../actions/index'
+import './Components.css'
 
 const toppingTypes = [
   "Pineapple",
@@ -15,8 +16,6 @@ const toppingTypes = [
 class Toppings extends PureComponent {
 
   handleOnSelect = (event) => {
-    // console.log("THIS IS MY HANDLE CHANGE topping BEING CALLED")
-    // console.log(event.target.value)
     if(event.target.checked) {
       this.props.addTopping(event.target.value)
     } else {
@@ -27,9 +26,9 @@ class Toppings extends PureComponent {
 
   render() {
     return (<div>
-      <div>
+      <div className="optionSpacing">
         <label className="form-label">Pick up to 3 toppings:</label>
-        <div className="checkbox-group" onChange={this.handleOnSelect}>
+        <div className="checkbox-group contentSpacing" onChange={this.handleOnSelect}>
           {
             toppingTypes.map(toppingType => {
               return (<label key={toppingType} className="form-label capitalize">

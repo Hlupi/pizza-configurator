@@ -23,6 +23,6 @@ export const toppingCost = {
 }
 
 export const turboCost = {
-  "Hell yeah!": .10,
-  "No, robots are here to kill us": 0 
+  "Yes, please!": .10,
+  "No, robots are here to kill us": 0
 }

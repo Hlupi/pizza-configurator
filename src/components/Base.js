@@ -1,20 +1,19 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { addBase } from '../actions/index'
+import './Components.css'
 
 const baseTypes = ["25cm NY Style", "30cm NY Style", "35cm NY Style", "20cm NY Style"]
 
 class Base extends PureComponent {
 
   handleChange = (event) => {
-    // console.log("THIS IS MY HANDLE CHANGE base BEING CALLED")
-    // console.log(event.target.value)
     this.props.addBase(event.target.value)
   }
 
   render() {
     return (<div>
-      <div className="form-group">
+      <div className="form-group optionSpacing">
         <label>Pick your base:
           <select name='base' onChange={this.handleChange} className="form-select">
             <option value="">Select a base..</option>
