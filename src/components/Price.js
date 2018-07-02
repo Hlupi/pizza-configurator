@@ -5,11 +5,8 @@ import { connect } from 'react-redux'
 
 class Price extends PureComponent {
   totalPrice() {
-    const baseMoney = this.props.pizza.base ? this.props.pizza.basePrice : 0
-    const sauceMoney = this.props.pizza.sauce ? this.props.pizza.saucePrice : 0
-    const toppingMoney = this.props.pizza.topping ? this.props.pizza.toppinPrice : 0
-    const turboMoney = this.props.pizza.turbo ? this.props.pizza.turboPrice : 0
-    const pizzaMoney = baseMoney + sauceMoney + toppingMoney
+    const turboMoney = this.props.pizza.turboPrice
+    const pizzaMoney = this.props.pizza.basePrice + this.props.pizza.saucePrice + this.props.pizza.toppinPrice
     return parseFloat(pizzaMoney + (pizzaMoney * turboMoney)).toFixed(2)
   }
 
