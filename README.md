@@ -1,4 +1,4 @@
-#React
+# React-Redux Pizza Configurator
 This project was build as week 5 homework of the Codaisseur academy.
 
 This project included the following requirements:
