@@ -1,13 +1,19 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { addTopping, removeTopping } from '../actions/index'
-import './Components.css'
+import FormControl from '@material-ui/core/FormControl'
+import FormLabel from '@material-ui/core/FormLabel'
+import FormGroup from '@material-ui/core/FormGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
+import FormHelperText from '@material-ui/core/FormHelperText'
+
 
 const toppingTypes = [
   "Pineapple",
   "Corn",
-  "Olives (green)",
-  "Red union",
+  "Green olives",
+  "Red onion",
   "Spinach",
   "Cherry tomatoes",
   "Chicken"
@@ -16,30 +22,40 @@ const toppingTypes = [
 class Toppings extends PureComponent {
 
   handleOnSelect = (event) => {
-    if(event.target.checked) {
-      this.props.addTopping(event.target.value)
-    } else {
+    if(this.props.pizza.topping.indexOf(event.target.value) !== -1) {
       this.props.removeTopping(event.target.value)
+    } else if(event.target.checked) {
+      if(this.props.pizza.topping.length <= 2) {
+        this.props.addTopping(event.target.value)
+      }
     }
   }
 
 
   render() {
     return (<div>
-      <div className="optionSpacing">
-        <label className="form-label">Pick up to 3 toppings:</label>
-        <div className="checkbox-group contentSpacing" onChange={this.handleOnSelect}>
-          {
-            toppingTypes.map(toppingType => {
-              return (<label key={toppingType} className="form-label capitalize">
-                <input className="form-checkbox" name={toppingType} value={toppingType}
-                  type="checkbox" /> {toppingType}
-              </label>);
-            })
-          }
-        </div>
-      </div>
-    </div>);
+      <FormControl>
+        <FormLabel>Pick your toppings*:</FormLabel>
+        <FormGroup>
+          {toppingTypes.map(toppingType => {
+            return (
+              <FormControlLabel
+                key={toppingType}
+                control={
+                  <Checkbox
+                    onChange={this.handleOnSelect}
+                    value={toppingType}
+                    checked={this.props.pizza.topping.indexOf(toppingType) !== -1}
+                  />
+                }
+                label={toppingType}/>
+            )
+          })}
+        </FormGroup>
+        <FormHelperText>*Choose up to 3 toppings</FormHelperText>
+      </FormControl>
+
+    </div>)
   }
 }
 

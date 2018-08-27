@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
+import './Components.css'
 
 
 
@@ -14,8 +15,8 @@ class Price extends PureComponent {
 
     return (
 
-      <div className="optionSpacing">
-        <h3>To Pay:</h3>
+      <div>
+        <h3 className="top">To Pay:</h3>
         <p>Base: {this.props.pizza.base} &euro;{this.props.pizza.basePrice}</p>
         <p>Sauce: {this.props.pizza.sauce}  &euro;{this.props.pizza.saucePrice}</p>
         <p id="finalPrice"><b>Total:</b> &euro;{this.totalPrice()}</p>

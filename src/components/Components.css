@@ -2,6 +2,10 @@ body {
   font-family: Roboto;
 }
 
+/* .paper {
+  height: 250px;
+} */
+
 .title {
   letter-spacing: 0.1rem;
 }
@@ -16,4 +20,8 @@ body {
 
 #finalPrice {
   color: #005b9f;
+}
+
+.top {
+  margin-top: 0;
 }

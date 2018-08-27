@@ -19,9 +19,9 @@ class TurboDelievery extends PureComponent {
   render() {
     return (
       <div>
-        <div className="optionSpacing">
+        <div>
           <label>For only 10% on top of my order I would like the turbo-drone-delivery:</label>
-          <div className="checkbox-group contentSpacing" onChange={this.handleOnSelect}> {
+          <div onChange={this.handleOnSelect}> {
             delievryOptions.map(delievryOption => {
               return (<label key={delievryOption}><input className="form-checkbox" name={delievryOption} value={delievryOption} type="checkbox" />{delievryOption}</label>)
             })
