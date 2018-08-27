@@ -5,7 +5,7 @@ This project included the following requirements:
 
 Create a pizza configurator for NewAgePizza.com, a new and hip venture to get your pizza. It should be a single page where the user can first choose a base, then a sauce, and finally some 3 toppings. Last but not least, the user can choose turbo-drone-delivery which is an additional 10% on top of the total pizza price.
 
-It is importnat that the user can change previous steps even if they already changed stuff before. So they could pick a base, a sauce and a topping and switch the base after that.
+It is important that the user can change previous steps even if they already changed stuff before. So they could pick a base, a sauce and a topping and switch the base after that.
 
 Additional instructions:
 
