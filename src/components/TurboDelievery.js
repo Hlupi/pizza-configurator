@@ -1,9 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { addTurboDelievery, removeTurboDelievery } from '../actions/index'
+import FormControl from '@material-ui/core/FormControl'
+import FormLabel from '@material-ui/core/FormLabel'
+import FormGroup from '@material-ui/core/FormGroup'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Checkbox from '@material-ui/core/Checkbox'
 
 
-const delievryOptions = ["Yes, please!"]
+const deliveryOptions = ["Yes, please!"]
 
 class TurboDelievery extends PureComponent {
 
@@ -17,19 +22,25 @@ class TurboDelievery extends PureComponent {
 
 
   render() {
-    return (
-      <div>
-        <div>
-          <label>For only 10% on top of my order I would like the turbo-drone-delivery:</label>
-          <div onChange={this.handleOnSelect}> {
-            delievryOptions.map(delievryOption => {
-              return (<label key={delievryOption}><input className="form-checkbox" name={delievryOption} value={delievryOption} type="checkbox" />{delievryOption}</label>)
-            })
-          }
-          </div>
-        </div>
-      </div>
-    );
+    return (<div>
+      <FormControl>
+        <FormLabel>Turbo-drone-delivery (+ 10%):</FormLabel>
+        <FormGroup>
+          {deliveryOptions.map(deliveryOption => {
+            return (
+              <FormControlLabel key={deliveryOption} control={<Checkbox
+                onChange={this.handleOnSelect}
+                value={deliveryOption} />
+              }
+              label={deliveryOption} />
+            )
+          })}
+
+        </FormGroup>
+      </FormControl>
+    </div>
+
+    )
   }
 }
 

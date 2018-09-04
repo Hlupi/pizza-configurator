@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { addTopping, removeTopping } from '../actions/index'
+import { toppingCost } from '../PizzaOptionsPrices'
 import FormControl from '@material-ui/core/FormControl'
 import FormLabel from '@material-ui/core/FormLabel'
 import FormGroup from '@material-ui/core/FormGroup'
@@ -48,7 +49,7 @@ class Toppings extends PureComponent {
                     checked={this.props.pizza.topping.indexOf(toppingType) !== -1}
                   />
                 }
-                label={toppingType}/>
+                label={toppingType +' - €'+ toppingCost[toppingType]}/>
             )
           })}
         </FormGroup>

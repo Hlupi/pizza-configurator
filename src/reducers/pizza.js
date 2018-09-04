@@ -7,7 +7,7 @@ const initialState = {
   sauce: '',
   saucePrice: 0,
   topping: [],
-  toppinPrice: 0,
+  toppingPrice: 0,
   turbo: '',
   turboPrice: 0
 }
@@ -33,7 +33,7 @@ export default function(state = initialState, action = {}) {
       return {
         ...state,
         topping: state.topping.concat(action.payload),
-        toppinPrice: state.toppinPrice += toppingCost[action.payload]
+        toppingPrice: state.toppingPrice += toppingCost[action.payload]
       }
     }
     else {
@@ -45,7 +45,7 @@ export default function(state = initialState, action = {}) {
     return {
       ...state,
       topping: state.topping.filter(topping => topping !== action.payload),
-      toppinPrice: state.toppinPrice -= toppingCost[action.payload]
+      toppingPrice: state.toppingPrice -= toppingCost[action.payload]
     }
 
   case ADD_TURBO_DELIEVERY:
