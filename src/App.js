@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import './App.css';
+import TopBar from './components/TopBar'
 import PizzaContainer from './components/PizzaContainer'
-
+import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">It's pizza time</h1>
+          <TopBar />
         </header>
 
         <main>

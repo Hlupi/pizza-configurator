@@ -16,25 +16,35 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 
 class PizzaContainer extends PureComponent {
+  state = {
+    expanded: null
+  }
+
+  handleChange = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false,
+    });
+  }
+
   render() {
+    const { expanded } = this.state
     return (
       <div>
         <h1 className="title">Make it your own</h1>
         <Grid container spacing={24}>
 
-          <Grid item xs={12} sm={6}>
-            
-            <ExpansionPanel>
+          <Grid item xs={12} sm={5}>
+
+            <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>Choose your base</Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Base />
-
               </ExpansionPanelDetails>
             </ExpansionPanel>
 
-            <ExpansionPanel>
+            <ExpansionPanel expanded={expanded === 'panel2'} onChange={this.handleChange('panel2')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>Choose a sauce</Typography>
               </ExpansionPanelSummary>
@@ -43,7 +53,7 @@ class PizzaContainer extends PureComponent {
               </ExpansionPanelDetails>
             </ExpansionPanel>
 
-            <ExpansionPanel>
+            <ExpansionPanel expanded={expanded === 'panel3'} onChange={this.handleChange('panel3')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>Top it up</Typography>
               </ExpansionPanelSummary>
@@ -52,17 +62,16 @@ class PizzaContainer extends PureComponent {
               </ExpansionPanelDetails>
             </ExpansionPanel>
 
-
-          </Grid>
-
-          <Grid item xs={12} sm={6}>
-            <Paper className="paper">
+            <Paper>
               <Price />
             </Paper>
+
+
           </Grid>
 
-          <Grid item xs={12}>
-            <Paper>
+          <Grid item xs={12} sm={7}>
+            <Paper className="paper">
+
               <h1>PIZZA IMAGE HERE</h1>
             </Paper>
           </Grid>
