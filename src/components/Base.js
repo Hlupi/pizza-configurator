@@ -2,12 +2,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { addBase } from '../actions/index'
 import { baseCost } from '../PizzaOptionsPrices'
-// import './Components.css'
-// import FormControl from '@material-ui/core/FormControl'
-// import FormLabel from '@material-ui/core/FormLabel'
-// import RadioGroup from '@material-ui/core/RadioGroup'
-// import FormControlLabel from '@material-ui/core/FormControlLabel'
-// import Radio from '@material-ui/core/Radio'
 
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
 

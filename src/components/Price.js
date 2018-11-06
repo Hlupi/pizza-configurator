@@ -4,7 +4,6 @@ import './Components.css'
 import TurboDelievery from './TurboDelievery'
 
 
-
 class Price extends PureComponent {
 
   totalPrice() {
@@ -17,8 +16,8 @@ class Price extends PureComponent {
 
     return (
 
-      <div>
-        <h3 className="top">Order:</h3>
+      <div className='OrderDetails'>
+        <h3>Order:</h3>
         <ul>
           <li>Base: {this.props.pizza.base} &euro;{(this.props.pizza.basePrice).toFixed(2)}</li>
           <li>Sauce: {this.props.pizza.sauce}  &euro;{(this.props.pizza.saucePrice).toFixed(2)}</li>

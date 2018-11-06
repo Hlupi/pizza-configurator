@@ -1,27 +1,20 @@
-/* body {
+body {
   font-family: Roboto;
-} */
-
-/* .paper {
-  height: 250px;
-} */
-/*
-.title {
-  letter-spacing: 0.1rem;
+  padding: 0 32px;
 }
 
-.optionSpacing {
-  margin: 10px auto
+h1 {
+  margin-top: 75px;
+  text-align: center;
 }
 
-.contentSpacing {
-  margin: 5px auto 0 auto
+.OrderDetails {
+  margin: 16px 25px;
+  padding: 5px 0;
 }
 
-#finalPrice {
-  color: #005b9f;
-}
+.pizza {
+  text-align: center;
+  padding: 16px 0;
 
-.top {
-  margin-top: 0;
-} */
+}

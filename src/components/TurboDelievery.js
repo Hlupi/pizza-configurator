@@ -20,7 +20,6 @@ class TurboDelievery extends PureComponent {
     }
   }
 
-
   render() {
     return (<div>
       <FormControl>

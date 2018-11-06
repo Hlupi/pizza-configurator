@@ -10,9 +10,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-// import './Components.css'
-
-
+import GifPlayer from 'react-gif-player';
+import './Components.css'
 
 
 class PizzaContainer extends PureComponent {
@@ -30,16 +29,16 @@ class PizzaContainer extends PureComponent {
     const { expanded } = this.state
     return (
       <div>
-        <h1 className="title">Make it your own</h1>
+        <h1>Make you delicious choices</h1>
         <Grid container spacing={24}>
 
-          <Grid item xs={12} sm={5}>
+          <Grid item xs={12} md={5}>
 
             <ExpansionPanel expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>Choose your base</Typography>
               </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
+              <ExpansionPanelDetails className='panel'>
                 <Base />
               </ExpansionPanelDetails>
             </ExpansionPanel>
@@ -69,10 +68,9 @@ class PizzaContainer extends PureComponent {
 
           </Grid>
 
-          <Grid item xs={12} sm={7}>
-            <Paper className="paper">
-
-              <h1>PIZZA IMAGE HERE</h1>
+          <Grid item xs={12} md={7}>
+            <Paper className='pizza'>
+              <GifPlayer gif='https://media.giphy.com/media/l3q2x2d942PCjkblK/giphy.gif' still='https://media.giphy.com/media/l3q2x2d942PCjkblK/giphy.gif' />
             </Paper>
           </Grid>
 
