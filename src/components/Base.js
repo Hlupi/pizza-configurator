@@ -1,45 +1,39 @@
-import React, { PureComponent } from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
 import { addBase } from '../actions/index'
 import { baseCost } from '../PizzaOptionsPrices'
 
-import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
+import Input from './fragments/input'
 
-const baseTypes = ["20cm NY Style", "25cm NY Style", "30cm NY Style", "35cm NY Style"]
 
-class Base extends PureComponent {
-  state= {
-    value: ''
+const baseTypes = [
+  '20cm NY Style',
+  '25cm NY Style',
+  '30cm NY Style',
+  '35cm NY Style',
+]
+
+const Base = props => {
+  const handleChange = event => {
+    props.addBase(event.target.value)
   }
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value})
-    this.props.addBase(event.target.value)
-  }
-
-  render() {
-    return(<div>
-      <FormControl>
-        <FormLabel>Pick your base:</FormLabel>
-        <RadioGroup
-          aria-label="Base"
-          onChange={this.handleChange}
-          value={this.state.value}>
-          {
-            baseTypes.map(baseType => {
-              return (<FormControlLabel key={baseType} value={baseType} control={<Radio />} label={baseType +' - €'+ baseCost[baseType]} />);
-            })}
-        </RadioGroup>
-
-      </FormControl>
-    </div>)
-  }
+  const renderBaseSizes = baseTypes.map((size, i) => {
+    return (
+      <Input key={i} type="radio" price={`€${baseCost[size]}`} value={size} onChange={handleChange} name="base" label={size} />
+    )
+  })
+  return (
+    <>
+      <h3>Pick the base</h3>
+      {renderBaseSizes}
+    </>
+  )
 }
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    pizza: state.pizza
+    pizza: state.pizza,
   }
 }
 

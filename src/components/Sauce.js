@@ -1,43 +1,28 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { addSauce } from '../actions/index'
 import { sauceCost } from '../PizzaOptionsPrices'
-import FormControl from '@material-ui/core/FormControl'
-import FormLabel from '@material-ui/core/FormLabel'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Radio from '@material-ui/core/Radio'
+
+import Input from './fragments/input'
 
 const sauceTypes = ["White sauce", "Red sauce", "Double red sauce", "Mix it up"]
 
 
-class Sauce extends PureComponent {
-  state= {
-    value: ''
+const Sauce = (props) => {
+  const handleChange = event => {
+      props.addSauce(event.target.value)
   }
-
-  handleChange = (event) => {
-    this.setState({ value: event.target.value})
-    this.props.addSauce(event.target.value)
-  }
-
-  render() {
-    return(<div>
-      <FormControl>
-        <FormLabel>Pick your sauce:</FormLabel>
-        <RadioGroup
-          aria-label="Base"
-          onChange={this.handleChange}
-          value={this.state.value}>
-          {
-            sauceTypes.map(sauceType => {
-              return (<FormControlLabel key={sauceType} value={sauceType} control={<Radio />} label={sauceType +' - €'+ sauceCost[sauceType]} />);
-            })}
-        </RadioGroup>
-
-      </FormControl>
-    </div>)
-  }
+  const renderSauces = sauceTypes.map((sauce,i) => {
+    return (
+      <Input key={i} type="radio" price={`€${sauceCost[sauce]}`} value={sauce} onChange={handleChange} name="sauce" label={sauce} />
+    )
+  })
+  return (
+    <>
+      <h3>Pick your sauce</h3>
+      {renderSauces}
+    </>
+  )
 }
 
 const mapStateToProps = (state) => {

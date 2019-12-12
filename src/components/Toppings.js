@@ -1,63 +1,33 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
 import { addTopping, removeTopping } from '../actions/index'
 import { toppingCost } from '../PizzaOptionsPrices'
-import FormControl from '@material-ui/core/FormControl'
-import FormLabel from '@material-ui/core/FormLabel'
-import FormGroup from '@material-ui/core/FormGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
-import FormHelperText from '@material-ui/core/FormHelperText'
+
+import Input from './fragments/input'
 
 
-const toppingTypes = [
-  "Pineapple",
-  "Corn",
-  "Green olives",
-  "Red onion",
-  "Spinach",
-  "Cherry tomatoes",
-  "Chicken"
-]
-
-class Toppings extends PureComponent {
-
-  handleOnSelect = (event) => {
-    if(this.props.pizza.topping.indexOf(event.target.value) !== -1) {
-      this.props.removeTopping(event.target.value)
-    } else if(event.target.checked) {
-      if(this.props.pizza.topping.length <= 2) {
-        this.props.addTopping(event.target.value)
+const toppings = ['Salami', 'Tomatoes', 'Mushrooms', 'Artichokes', 'Pineapple', 'Black olives', 'Green olives', 'Red onion', 'Spinach', 'Corn']
+const Toppings = props => {
+  const handleOnSelect = event => {
+      if (props.pizza.topping.indexOf(event.target.value) !== -1) {
+        props.removeTopping(event.target.value)
+      } else if (event.target.checked) {
+          if (props.pizza.topping.length <= 2) {
+              props.addTopping(event.target.value)
+          }
       }
-    }
   }
-
-
-  render() {
-    return (<div>
-      <FormControl>
-        <FormLabel>Pick your toppings*:</FormLabel>
-        <FormGroup>
-          {toppingTypes.map(toppingType => {
-            return (
-              <FormControlLabel
-                key={toppingType}
-                control={
-                  <Checkbox
-                    onChange={this.handleOnSelect}
-                    value={toppingType}
-                    checked={this.props.pizza.topping.indexOf(toppingType) !== -1}
-                  />
-                }
-                label={toppingType +' - €'+ toppingCost[toppingType]}/>
-            )
-          })}
-        </FormGroup>
-        <FormHelperText>*Choose up to 3 toppings</FormHelperText>
-      </FormControl>
-
-    </div>)
-  }
+  const renderToppings = toppings.map((topping, i) => {
+    return (
+      <Input key={i} type="checkbox" price={`€${toppingCost[topping]}`} value={topping} onChange={handleOnSelect} name="toppings" label={topping} checked={props.pizza.topping.indexOf(topping) !== -1} />
+    )
+  })
+  return (
+    <>
+      <h3>Pick your toppings*:</h3>
+      {renderToppings}
+    </>
+  )
 }
 
 const mapStateToProps = (state) => {
