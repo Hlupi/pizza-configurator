@@ -52,6 +52,8 @@ export default createGlobalStyle`
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Sulphur Point', sans-serif;
+    margin-bottom: 20px;
+    text-align: center;
   }
 
   input {

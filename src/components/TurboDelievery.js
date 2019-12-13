@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { addTurboDelievery, removeTurboDelievery } from '../actions/index'
 
+import Select from './fragments/select'
+
 
 const deliveryOptions = ["Yes, please!"]
 
@@ -16,9 +18,7 @@ const Delivery = props => {
 
   const renderDeliveryOptions = deliveryOptions.map((option, i) => {
     return (
-      <label key={i}>{option}
-        <input type="checkbox" onChange={handleOnSelect} value={option} />
-      </label>
+      <Select key={i} type="checkbox" value={option} onChange={handleOnSelect} label={option} tick />
     )
   })
 

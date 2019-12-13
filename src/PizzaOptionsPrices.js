@@ -6,20 +6,24 @@ export const baseCost = {
 }
 
 export const sauceCost = {
-  "White sauce": 0,
-  "Red sauce": 0,
-  "Double red sauce": 1.00,
-  "Mix it up": 1.50
+  "White sauce": 1.00,
+  "Red sauce": 1.00,
+  "Double red sauce": 1.50,
+  "Mix it up": 2.00
 }
 
 export const toppingCost = {
-  "Pineapple": 0.50,
-  "Corn": 0.50,
-  "Green olives": 0.50,
-  "Red onion": 0.50,
-  "Spinach": 0.50,
-  "Cherry tomatoes": 0.50,
-  "Chicken": 0.50
+  'Salami': 1.00, 
+  'Tomatoes': 0.50, 
+  'Mushrooms': 0.50, 
+  'Artichokes': 1.00, 
+  'Pineapple': 1.00, 
+  'Black olives': 0.50, 
+  'Green olives': 0.50, 
+  'Red onion': 0.50, 
+  'Spinach': 0.50, 
+  'Corn': 0.50
+  
 }
 
 export const turboCost = {

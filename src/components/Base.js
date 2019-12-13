@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { addBase } from '../actions/index'
 import { baseCost } from '../PizzaOptionsPrices'
 
-import Input from './fragments/input'
+import Select from './fragments/select'
 
 
 const baseTypes = [
@@ -20,7 +20,7 @@ const Base = props => {
 
   const renderBaseSizes = baseTypes.map((size, i) => {
     return (
-      <Input key={i} type="radio" price={`€${baseCost[size]}`} value={size} onChange={handleChange} name="base" label={size} />
+      <Select key={i} type="radio" price={`€${baseCost[size].toFixed(2)}`} value={size} onChange={handleChange} name="base" label={size} />
     )
   })
   return (

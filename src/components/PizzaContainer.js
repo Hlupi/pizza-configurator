@@ -1,11 +1,13 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components'
 
+import Pizza from './Pizza'
 import Base from './Base'
 import Sauce from './Sauce'
 import Toppings from './Toppings'
 import Price from './Price'
-import Pizza from './Pizza'
+import Left from './fragments/left'
+import Right from './fragments/right'
 
 const Container = styled.section`
   padding: 40px;
@@ -22,22 +24,107 @@ const Container = styled.section`
     }
 `
 
-
-class PizzaContainer extends PureComponent {
-
-  render() {
-    return (
-      <Container>
-        <h1>Make you delicious choices</h1>
-        <h2>Pizza Pi</h2>
-        <Pizza size={'200px'} />
-        <Base />
-        <Sauce />
-        <Toppings />
-        <Price />
-      </Container>     
-    )
+const Wrapper = styled.div`
+  overflow-x: hidden;
+  position: relative;
+`
+const Button = styled.button`
+  padding: 0;
+  position: absolute;
+  top: 40%;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  opacity: 0.7;
+  z-index: 1;
+  transition: opacity 0.25s linear;
+  &:hover {
+    opacity: 1;
   }
+
+  & > svg {
+    width: 30%;
+  }
+`
+
+const Slider = styled.div`
+  display: flex;
+  transition: transform 0.25s linear;
+`
+
+const Slide = styled.div`
+  width: 70%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  &:not(:last-child) {
+    margin-right: 40px;
+  }
+
+  &::before {
+    content: attr(step);
+    margin: 0 auto 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: ${({ active }) => active ? '#feaf7b' : '#EFEFEF'};
+  }
+  @media (min-width: 640px) {
+    width: 50%;
+  }
+`
+
+const Card = styled.div`
+  padding: 40px 20px;
+  background: #EFEFEF;
+  border-radius: 20px;
+`
+
+
+const PizzaContainer = () => {
+  const [active, setActive] = useState(0)
+  const [translate, setTranslate] = useState(0)
+  const slider = useRef()
+
+  const slideLeft = () => {
+    setActive(active - 1)
+    setTranslate(translate + 50)
+  }
+
+  const slideRight = () => {
+    setActive(active + 1)
+    setTranslate(translate - 50)
+  }
+
+
+
+  const children = [<Base />, <Sauce />, <Toppings />, <Price />]
+  const numOfchildren = children.length
+  const renderCards = children.map((child, i) => {
+    return (
+      <Slide key={i} step={i + 1} active={active === i}>
+      <Card>{child}</Card>
+      </Slide>
+    )
+  })
+
+  return (
+    <Container>
+      <h1>Mix and match and then you buy</h1>
+      <Pizza size={'200px'} />
+      <Wrapper>
+        { active > 0 && <Button onClick={slideLeft} style={{left: 0}}><Left /></Button>}
+        <Slider style={{transform: `translateX(${translate}%)`}} ref={slider}>
+          {renderCards}
+        </Slider>
+        { active < numOfchildren - 1 && <Button onClick={slideRight} style={{right: 0}}><Right /></Button>}
+      </Wrapper>
+    </Container>     
+  )
 }
 
 export default PizzaContainer

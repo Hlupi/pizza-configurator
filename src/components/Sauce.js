@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { addSauce } from '../actions/index'
 import { sauceCost } from '../PizzaOptionsPrices'
 
-import Input from './fragments/input'
+import Select from './fragments/select'
 
 const sauceTypes = ["White sauce", "Red sauce", "Double red sauce", "Mix it up"]
 
@@ -14,7 +14,7 @@ const Sauce = (props) => {
   }
   const renderSauces = sauceTypes.map((sauce,i) => {
     return (
-      <Input key={i} type="radio" price={`€${sauceCost[sauce]}`} value={sauce} onChange={handleChange} name="sauce" label={sauce} />
+      <Select key={i} type="radio" price={`€${sauceCost[sauce].toFixed(2)}`} value={sauce} onChange={handleChange} name="sauce" label={sauce} />
     )
   })
   return (

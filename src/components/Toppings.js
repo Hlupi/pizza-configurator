@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { addTopping, removeTopping } from '../actions/index'
 import { toppingCost } from '../PizzaOptionsPrices'
 
-import Input from './fragments/input'
+import Select from './fragments/select'
 
 
 const toppings = ['Salami', 'Tomatoes', 'Mushrooms', 'Artichokes', 'Pineapple', 'Black olives', 'Green olives', 'Red onion', 'Spinach', 'Corn']
@@ -19,7 +19,7 @@ const Toppings = props => {
   }
   const renderToppings = toppings.map((topping, i) => {
     return (
-      <Input key={i} type="checkbox" price={`€${toppingCost[topping]}`} value={topping} onChange={handleOnSelect} name="toppings" label={topping} checked={props.pizza.topping.indexOf(topping) !== -1} />
+      <Select key={i} type="checkbox" price={`€${toppingCost[topping].toFixed(2)}`} value={topping} onChange={handleOnSelect} name="toppings" label={topping} checked={props.pizza.topping.indexOf(topping) !== -1} />
     )
   })
   return (
