@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import Pizza from './Pizza'
@@ -25,6 +26,7 @@ const Container = styled.section`
 `
 
 const Wrapper = styled.div`
+  margin-top: 40px;
   overflow-x: hidden;
   position: relative;
 `
@@ -55,12 +57,9 @@ const Slider = styled.div`
 `
 
 const Slide = styled.div`
-  width: 70%;
+  width: 100%;
   flex-grow: 0;
   flex-shrink: 0;
-  &:not(:last-child) {
-    margin-right: 40px;
-  }
 
   &::before {
     content: attr(step);
@@ -73,34 +72,35 @@ const Slide = styled.div`
     align-items: center;
     background: ${({ active }) => active ? '#feaf7b' : '#EFEFEF'};
   }
+  
+`
+
+const Card = styled.div`
+  margin: 0 auto;
+  padding: 40px 20px;
+  background: #EFEFEF;
+  border-radius: 20px;
+  width: 80%;
   @media (min-width: 640px) {
     width: 50%;
   }
 `
 
-const Card = styled.div`
-  padding: 40px 20px;
-  background: #EFEFEF;
-  border-radius: 20px;
-`
 
-
-const PizzaContainer = () => {
+const PizzaContainer = ({ size, toppings }) => {
   const [active, setActive] = useState(0)
   const [translate, setTranslate] = useState(0)
   const slider = useRef()
 
   const slideLeft = () => {
     setActive(active - 1)
-    setTranslate(translate + 50)
+    setTranslate(translate + 100)
   }
 
   const slideRight = () => {
     setActive(active + 1)
-    setTranslate(translate - 50)
+    setTranslate(translate - 100)
   }
-
-
 
   const children = [<Base />, <Sauce />, <Toppings />, <Price />]
   const numOfchildren = children.length
@@ -111,11 +111,11 @@ const PizzaContainer = () => {
       </Slide>
     )
   })
-
+  
   return (
     <Container>
       <h1>Mix and match and then you buy</h1>
-      <Pizza size={'200px'} />
+      <Pizza size={size * 10} toppings={toppings} />
       <Wrapper>
         { active > 0 && <Button onClick={slideLeft} style={{left: 0}}><Left /></Button>}
         <Slider style={{transform: `translateX(${translate}%)`}} ref={slider}>
@@ -127,4 +127,11 @@ const PizzaContainer = () => {
   )
 }
 
-export default PizzaContainer
+const mapStateToProps = state => {
+  return {
+    size: state.pizza.base && state.pizza.base.slice(0,2),
+    toppings: state.pizza.topping
+  }
+}
+
+export default connect(mapStateToProps)(PizzaContainer)
