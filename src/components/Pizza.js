@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Group = styled.g`
     opacity: ${({ visible }) => visible ? 1 : 0};
-    transition: opacity .25s linear;
+    transition: opacity .25s linear, transform .45s linear;
 `
 
 const Pizza = ({ size, toppings }) => {
@@ -16,7 +16,7 @@ const Pizza = ({ size, toppings }) => {
                 <circle id="Oval" cx="112.5" cy="112.5" r="112.5" fill="#FFD15C"/>
                 <path id="Shape" fill="#FF7058" fillRule="nonzero" d="M113.001 212.973c-55.273 0-99.972-44.698-99.972-99.972 0-55.273 44.699-99.972 99.972-99.972 55.274 0 99.972 44.699 99.972 99.972 0 55.274-44.698 99.972-99.972 99.972zm.463-189.762c-49.926 0-90.253 40.326-90.253 90.253 0 49.926 40.326 90.253 90.253 90.253 49.926 0 90.253-40.326 90.253-90.253 0-49.926-40.326-90.253-90.253-90.253z"/>
             </g>
-            <Group id="salami" transform="translate(36.129 26.733)" visible={check('salami')}>
+            <Group id="salami" transform="translate(36.129 26.733)" visible={check('salami')} style={check('salami') ? {transform: "translate(36.129px, 26.733px)"} : {transform: "translate(36.129px, -50%)"} }>
                 <g transform="translate(120 59)">
                 <path id="Path" fill="#FFC1B8" d="M24.893 12.446c0 6.875-5.572 12.447-12.447 12.447C5.572 24.893 0 19.32 0 12.446 0 5.572 5.572 0 12.446 0c6.875 0 12.447 5.572 12.447 12.446z"/>
                 <path id="Path" fill="#FFB3A8" d="M24.893 12.446c0 6.875-5.573 12.447-12.446 12.447-.466 0-.927-.025-1.38-.077 6.226-.685 11.068-5.961 11.068-12.37 0-6.408-4.842-11.684-11.067-12.369C11.52.025 11.98 0 12.447 0c6.873 0 12.446 5.572 12.446 12.446z"/>
