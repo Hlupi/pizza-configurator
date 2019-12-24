@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import Pizza from './Pizza'
+import Pizza from './Pizza2'
 import Base from './Base'
 import Sauce from './Sauce'
 import Toppings from './Toppings'
