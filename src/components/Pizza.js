@@ -98,7 +98,7 @@ const Pizza = ({ size, toppings }) => {
   }, [corn])
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" width={size ? size : '0'} style={{ transition: 'width 0.25s linear' }}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" width={size ? size : '0'} style={{ transition: 'width 0.25s linear' }} role="img">
         <g id="pizza">
           <g id="base">
             <circle id="Oval" cx="178.5" cy="178.5" r="178.5" fill="#FFD15C" />
