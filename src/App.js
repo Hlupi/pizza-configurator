@@ -7,8 +7,7 @@ class App extends Component {
   render() {
     return (
       <>
-      <Defaults />
-        <header>Pizza Pi</header>
+        <Defaults />
         <main>
           <PizzaContainer />
         </main>

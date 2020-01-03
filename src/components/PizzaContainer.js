@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import Pizza from './Pizza2'
+import Pizza from './Pizza'
 import Base from './Base'
 import Sauce from './Sauce'
 import Toppings from './Toppings'
@@ -102,7 +102,7 @@ const PizzaContainer = ({ size, toppings }) => {
     setTranslate(translate - 100)
   }
 
-  const children = [<Base />, <Sauce />, <Toppings />, <Price />]
+  const children = [<Base />, <Toppings />, <Sauce />, <Price />]
   const numOfchildren = children.length
   const renderCards = children.map((child, i) => {
     return (
@@ -114,7 +114,9 @@ const PizzaContainer = ({ size, toppings }) => {
 
   return (
     <Container>
-      <h1>Mix and match and then you buy</h1>
+      <header>
+        <h1>Mix and match and then you buy</h1>
+      </header>
       <Pizza size={size * 10} toppings={toppings} />
       <Wrapper>
         {active > 0 && (

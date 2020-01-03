@@ -5,7 +5,7 @@ import { toppingCost } from '../PizzaOptionsPrices'
 
 import Select from './fragments/select'
 
-const toppings = ['Salami', 'Tomatoes', 'Mushrooms', 'Artichokes', 'Pineapple', 'Black olives', 'Green olives', 'Red onion', 'Spinach', 'Corn']
+const toppings = ['Tomatoes', 'Salami', 'Mushrooms', 'Artichokes', 'Pineapple', 'Black olives', 'Green olives', 'Red onion', 'Spinach', 'Corn']
 const Toppings = props => {
   const handleOnSelect = event => {
     if (props.pizza.topping.indexOf(event.target.value) !== -1) {
