@@ -2,6 +2,13 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import TweenMax, { Cubic, Back, Elastic, Bounce, Circ, SteppedEase } from 'gsap'
 
+const SVG = styled.svg`
+  width: ${({ size }) => size ? `${size}px` : 0};
+  @media(max-width: 389px) {
+    width: ${({ size }) => `calc(${size}px - 60px)`};
+  }
+`
+
 const Group = styled.g`
     opacity: ${({ visible }) => visible ? 1 : 0};
     transition: opacity .5s linear;
@@ -98,7 +105,7 @@ const Pizza = ({ size, toppings }) => {
   }, [corn])
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" width={size ? size : '0'} style={{ transition: 'width 0.25s linear' }} role="img">
+    <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" size={size} style={{ transition: 'width 0.25s linear' }} role="img">
         <g id="pizza">
           <g id="base">
             <circle id="Oval" cx="178.5" cy="178.5" r="178.5" fill="#FFD15C" />
@@ -951,9 +958,7 @@ const Pizza = ({ size, toppings }) => {
             </g>
           </Group>
         </g>
-    </svg>
-
-
+    </SVG>
   )
 }
 

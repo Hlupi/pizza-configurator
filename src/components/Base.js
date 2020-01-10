@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import { addBase } from '../actions/index'
 import { baseCost } from '../PizzaOptionsPrices'
-
+import { Legend } from './fragments/form-elements'
 import Select from './fragments/select'
 
 
@@ -24,10 +25,10 @@ const Base = props => {
     )
   })
   return (
-    <>
-      <h3>Pick the base</h3>
+    <fieldset>
+      <Legend>Pick the base</Legend>
       {renderBaseSizes}
-    </>
+    </fieldset>
   )
 }
 

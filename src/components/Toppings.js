@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import { addTopping, removeTopping } from '../actions/index'
 import { toppingCost } from '../PizzaOptionsPrices'
-
+import { Legend } from './fragments/form-elements'
 import Select from './fragments/select'
 
 const toppings = ['Tomatoes', 'Salami', 'Mushrooms', 'Artichokes', 'Pineapple', 'Black olives', 'Green olives', 'Red onion', 'Spinach', 'Corn']
@@ -31,10 +32,10 @@ const Toppings = props => {
     )
   })
   return (
-    <>
-      <h3>Pick your toppings*:</h3>
+    <fieldset>
+      <Legend>Pick your toppings</Legend>
       {renderToppings}
-    </>
+    </fieldset>
   )
 }
 

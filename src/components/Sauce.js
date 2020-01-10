@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
+
 import { addSauce } from '../actions/index'
 import { sauceCost } from '../PizzaOptionsPrices'
-
+import { Legend } from './fragments/form-elements'
 import Select from './fragments/select'
 
 const sauceTypes = ["White sauce", "Red sauce", "Double red sauce", "Mix it up"]
@@ -18,10 +19,10 @@ const Sauce = (props) => {
     )
   })
   return (
-    <>
-      <h3>Pick your sauce</h3>
+    <fieldset>
+      <Legend>Pick your sauce</Legend>
       {renderSauces}
-    </>
+    </fieldset>
   )
 }
 

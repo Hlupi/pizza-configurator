@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -12,13 +12,14 @@ import Right from './fragments/right'
 
 const Container = styled.section`
   margin-bottom: 20px;
-  padding: 40px;
+  padding: 20px;
   & > svg {
     display: block;
     margin: 0 auto;
   }
 
   @media (min-width: 640px) {
+    padding: 40px;
     margin-left: auto;
     margin-right: auto;
     max-width: 640px;
@@ -32,6 +33,7 @@ const Wrapper = styled.div`
   overflow-x: hidden;
   position: relative;
 `
+
 const Button = styled.button`
   padding: 0;
   position: absolute;
@@ -92,6 +94,7 @@ const PizzaContainer = ({ size, toppings }) => {
   const [translate, setTranslate] = useState(0)
   const slider = useRef()
 
+
   const slideLeft = () => {
     setActive(active - 1)
     setTranslate(translate + 100)
@@ -102,8 +105,26 @@ const PizzaContainer = ({ size, toppings }) => {
     setTranslate(translate - 100)
   }
 
+  const arrowControls = e => {
+    if (e.keyCode == '39' && maySlideRight) {
+      slideRight()
+    }
+    if (e.keyCode == '37' && maySlideLeft) {
+      slideLeft()
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', arrowControls)
+    return () => {
+      window.removeEventListener('keydown', arrowControls)
+    }
+  })
+
   const children = [<Base />, <Toppings />, <Sauce />, <Price />]
   const numOfchildren = children.length
+  const maySlideRight = active < numOfchildren - 1
+  const maySlideLeft = active > 0
   const renderCards = children.map((child, i) => {
     return (
       <Slide key={i} step={i + 1} active={active === i}>
@@ -113,13 +134,13 @@ const PizzaContainer = ({ size, toppings }) => {
   })
 
   return (
-    <Container>
+    <Container pizzaSize={size}>
       <header>
         <h1>Mix and match and then you buy</h1>
       </header>
       <Pizza size={size * 10} toppings={toppings} />
       <Wrapper>
-        {active > 0 && (
+        {maySlideLeft && (
           <Button onClick={slideLeft} style={{ left: 0 }}>
             <Left />
           </Button>
@@ -127,7 +148,7 @@ const PizzaContainer = ({ size, toppings }) => {
         <Slider style={{ transform: `translateX(${translate}%)` }} ref={slider}>
           {renderCards}
         </Slider>
-        {active < numOfchildren - 1 && (
+        {maySlideRight && (
           <Button onClick={slideRight} style={{ right: 0 }}>
             <Right />
           </Button>

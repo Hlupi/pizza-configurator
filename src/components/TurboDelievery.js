@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
+
 import { addTurboDelievery, removeTurboDelievery } from '../actions/index'
-
+import { Legend } from './fragments/form-elements'
 import Select from './fragments/select'
-
 
 const deliveryOptions = ["Yes, please!"]
 
@@ -18,14 +18,15 @@ const Delivery = props => {
 
   const renderDeliveryOptions = deliveryOptions.map((option, i) => {
     return (
-      <Select key={i} type="checkbox" value={option} onChange={handleOnSelect} label={option} tick />
+      <Select key={i} type="checkbox" value={option} onChange={handleOnSelect} label={option} price="+10%" tick />
     )
   })
 
   return (
-    <>
+    <fieldset>
+      <Legend special>Add turbo delivery?</Legend>
     {renderDeliveryOptions}
-    </>
+    </fieldset>
   )
 }
 

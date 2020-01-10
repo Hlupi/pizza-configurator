@@ -53,9 +53,17 @@ export default createGlobalStyle`
     font-family: 'Sulphur Point', sans-serif;
     margin-bottom: 20px;
     text-align: center;
+    font-weight: bold;
   }
 
-  input {
+  fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+  }
+
+   input {
     margin: 0;
   }
+
 `
