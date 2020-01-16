@@ -1,46 +1,31 @@
-import React, { PureComponent } from 'react';
+import React from 'react'
 import { connect } from 'react-redux'
+
+import { bases } from '../data'
 import { addBase } from '../actions/index'
-import { baseCost } from '../PizzaOptionsPrices'
+import Fieldset from './fragments/form-elements'
+import Select from './fragments/select'
 
-import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
 
-const baseTypes = ["20cm NY Style", "25cm NY Style", "30cm NY Style", "35cm NY Style"]
+const Base = ({ addBase }) => {
 
-class Base extends PureComponent {
-  state= {
-    value: ''
+  const handleChange = event => {
+    addBase(event.target.value)
   }
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value})
-    this.props.addBase(event.target.value)
-  }
+  const renderBaseSizes = bases.map((base, i) => {
+    return (
+      <Select key={i} type="radio" price={`€${base.price.toFixed(2)}`} value={base.name} onChange={handleChange} name="base" label={base.name} />
+    )
+  })
 
-  render() {
-    return(<div>
-      <FormControl>
-        <FormLabel>Pick your base:</FormLabel>
-        <RadioGroup
-          aria-label="Base"
-          onChange={this.handleChange}
-          value={this.state.value}>
-          {
-            baseTypes.map(baseType => {
-              return (<FormControlLabel key={baseType} value={baseType} control={<Radio />} label={baseType +' - €'+ baseCost[baseType]} />);
-            })}
-        </RadioGroup>
-
-      </FormControl>
-    </div>)
-  }
+  return (
+    <>
+      <Fieldset legend="Pick the base">
+        {renderBaseSizes}
+      </Fieldset>
+    </>
+  )
 }
 
-
-const mapStateToProps = (state) => {
-  return {
-    pizza: state.pizza
-  }
-}
-
-export default connect(mapStateToProps, { addBase })(Base)
+export default connect(null, { addBase })(Base)

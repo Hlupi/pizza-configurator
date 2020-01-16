@@ -1,49 +1,29 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
+
+import { sauces } from '../data'
 import { addSauce } from '../actions/index'
-import { sauceCost } from '../PizzaOptionsPrices'
-import FormControl from '@material-ui/core/FormControl'
-import FormLabel from '@material-ui/core/FormLabel'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Radio from '@material-ui/core/Radio'
-
-const sauceTypes = ["White sauce", "Red sauce", "Double red sauce", "Mix it up"]
+import Fieldset from './fragments/form-elements'
+import Select from './fragments/select'
 
 
-class Sauce extends PureComponent {
-  state= {
-    value: ''
+const Sauce = (props) => {
+
+  const handleChange = event => {
+      props.addSauce(event.target.value)
   }
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value})
-    this.props.addSauce(event.target.value)
-  }
-
-  render() {
-    return(<div>
-      <FormControl>
-        <FormLabel>Pick your sauce:</FormLabel>
-        <RadioGroup
-          aria-label="Base"
-          onChange={this.handleChange}
-          value={this.state.value}>
-          {
-            sauceTypes.map(sauceType => {
-              return (<FormControlLabel key={sauceType} value={sauceType} control={<Radio />} label={sauceType +' - €'+ sauceCost[sauceType]} />);
-            })}
-        </RadioGroup>
-
-      </FormControl>
-    </div>)
-  }
+  const renderSauces = sauces.map((sauce,i) => {
+    return (
+      <Select key={i} type="radio" price={`€${sauce.price.toFixed(2)}`} value={sauce.name} onChange={handleChange} name="sauce" label={sauce.name} />
+    )
+  })
+  
+  return (
+    <Fieldset legend="Pick your sauce">
+      {renderSauces}
+    </Fieldset>
+  )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    pizza: state.pizza
-  }
-}
-
-export default connect(mapStateToProps, { addSauce })(Sauce)
+export default connect(null, { addSauce })(Sauce)

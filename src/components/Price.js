@@ -1,43 +1,49 @@
-import React, { PureComponent } from 'react';
+import React  from 'react';
 import { connect } from 'react-redux'
-import './Components.css'
+import styled from 'styled-components'
+
 import TurboDelievery from './TurboDelievery'
+import { Flex } from './fragments/shared'
+import { calculatePrice, calculateToppingsPrice } from '../helpers'
 
 
-class Price extends PureComponent {
+const Sublist = styled.ul`
+  padding-left: 30px;
+`
 
-  totalPrice() {
-    const turboMoney = this.props.pizza.turboPrice
-    const pizzaMoney = this.props.pizza.basePrice + this.props.pizza.saucePrice + this.props.pizza.toppingPrice
-    return (pizzaMoney + (pizzaMoney * turboMoney)).toFixed(2)
-  }
+const Total = styled(Flex)`
+  font-weight: bold;
+`
 
-  render() {
+
+const Price = ({ base, sauce, toppings, deliveryPrice }) => {
+
+  const totalPrice = calculatePrice(base, sauce, toppings, deliveryPrice).toFixed(2)
 
     return (
-
       <div className='OrderDetails'>
         <h3>Order:</h3>
         <ul>
-          <li>Base: {this.props.pizza.base} &euro;{(this.props.pizza.basePrice).toFixed(2)}</li>
-          <li>Sauce: {this.props.pizza.sauce}  &euro;{(this.props.pizza.saucePrice).toFixed(2)}</li>
-          <li>Toppings: &euro;{(this.props.pizza.toppingPrice).toFixed(2)}</li>
-          <ul> {this.props.pizza.topping.length > 0 && this.props.pizza.topping.map(topping => {
-            return (<li key ={topping}>{topping} &euro;0.50</li>)
-          })} </ul>
+          <Flex as="li">Base: {base.name} <span>&euro;{(base.price.toFixed(2))}</span></Flex>
+          <Flex as="li">Sauce: {sauce.name} <span>&euro;{(sauce.price.toFixed(2))}</span></Flex>
+          <Flex as="li">Toppings: <span>&euro;{(calculateToppingsPrice(toppings)).toFixed(2)}</span></Flex>
+          <Sublist>{toppings.map(topping => {
+            return (<Flex as="li" key={topping.name}>{topping.name} <span>&euro;{topping.price.toFixed(2)}</span></Flex>)
+          })} </Sublist>
         </ul>
         <TurboDelievery />
-        <p id="finalPrice"><b>Total:</b> &euro;{this.totalPrice()}</p>
+        <Total as="p">Total: <span>&euro;{totalPrice}</span></Total>
       </div>
     );
-  }
 }
 
 const mapStateToProps = (state) => {
   return {
-    pizza: state.pizza
+    base: state.base,
+    sauce: state.sauce,
+    toppings: state.toppings,
+    deliveryPrice: state.delivery.price
   }
 }
-
 
 export default connect(mapStateToProps)(Price)
