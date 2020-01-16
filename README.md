@@ -3,8 +3,8 @@ This project was build as week 5 homework of the Codaisseur academy.
 
 ## This project included the following requirements:
 
-Create a pizza configurator for NewAgePizza.com, a new and hip venture to get your pizza.
-It should be a single page where the user can first choose a base, then a sauce, and finally some 3 toppings.
+Create a pizza configurator for Pizza Pi, a new and hip venture to get your pizza.
+It should be a single page where the user can first choose a base, then a sauce, and finally some toppings.
 Last but not least, the user can choose turbo-drone-delivery which is an additional 10% on top of the total pizza price.
 
 It is important that the user can change previous steps even if they already changed stuff before.
@@ -19,5 +19,5 @@ This project was bootstraped with `Create-React-App` and uses `Redux` for state 
 
 ## To run:
 - clone/download the repo
-- `yarn install` to add the dependencies
-- `yarn start` to start the app
+- `npm install` to add the dependencies
+- `npm start` to start the app
