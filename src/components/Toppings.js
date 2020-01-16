@@ -1,47 +1,49 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { toppings as toppingsOptions } from '../data'
 import { addTopping, removeTopping } from '../actions/index'
-import { toppingCost } from '../PizzaOptionsPrices'
-import { Legend } from './fragments/form-elements'
+import Fieldset from './fragments/form-elements'
 import Select from './fragments/select'
 
-const toppings = ['Tomatoes', 'Salami', 'Mushrooms', 'Artichokes', 'Pineapple', 'Black olives', 'Green olives', 'Red onion', 'Spinach', 'Corn']
-const Toppings = props => {
-  const handleOnSelect = event => {
-    if (props.pizza.topping.indexOf(event.target.value) !== -1) {
-      props.removeTopping(event.target.value)
-    } else if (event.target.checked) {
-      // if (props.pizza.topping.length <= 2) {
-      props.addTopping(event.target.value)
-      // }
+
+const Toppings = ({ toppings, removeTopping, addTopping }) => {
+  
+  const checked = (topping) => toppings.find(t => t.name === topping)
+
+  const handleOnSelect = (e) => {
+    if (checked(e.target.value)) {
+      removeTopping(e.target.value)
+    } else {
+      addTopping(e.target.value)
     }
   }
-  const renderToppings = toppings.map((topping, i) => {
+
+  const renderToppings = toppingsOptions.map((topping, i) => {
     return (
       <Select
         key={i}
         type='checkbox'
-        price={`€${toppingCost[topping].toFixed(2)}`}
-        value={topping}
+        price={`€${topping.price.toFixed(2)}`}
+        value={topping.name}
         onChange={handleOnSelect}
         name='toppings'
-        label={topping}
-        checked={props.pizza.topping.indexOf(topping) !== -1}
+        label={topping.name}
+        checked={checked(topping.name)}
       />
     )
   })
+
   return (
-    <fieldset>
-      <Legend>Pick your toppings</Legend>
+    <Fieldset legend="Pick your toppings">
       {renderToppings}
-    </fieldset>
+    </Fieldset>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    pizza: state.pizza
+    toppings: state.toppings
   }
 }
 

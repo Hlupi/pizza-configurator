@@ -1,16 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 
+import { Flex } from './shared'
+
 const Wrapper = styled.div`
   display: flex;
 `
 
-const Label = styled.label`
+const Label = styled(Flex)`
   margin-left: auto;
   position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: calc(100% - 30px);
   cursor: pointer;
 
@@ -56,17 +55,18 @@ const Input = styled.input`
   }
 
   &:focus + ${Label}::before {
-    box-shadow: 0 0px 8px #feaf7b;
+    box-shadow: 0 0px 8px #feaf7b; 
   }
 `
 
-const Select = props => {
+
+const Select = (props) => {
   const { type, price, value, onChange, name, label, tick } = props
   const radio = type === 'radio'
   return (
     <Wrapper>
-      <Input type={type} value={value} onChange={onChange} name={name} id={value} tick={tick} />
-      <Label htmlFor={value} radio={radio}>{label} <span>{price}</span></Label>
+      <Input type={type} value={value} onChange={onChange} name={name} id={value} tick={tick}  />
+      <Label as="label" htmlFor={value} radio={radio}>{label} <span>{price}</span></Label>
     </Wrapper>
   )
 }

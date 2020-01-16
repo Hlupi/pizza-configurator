@@ -1,6 +1,13 @@
 import { combineReducers } from 'redux'
-import pizza from './pizza'
+
+import base from './base'
+import sauce from './sauce'
+import toppings from './toppings'
+import delivery from './delivery'
 
 export default combineReducers({
-  pizza
+  base,
+  sauce,
+  toppings,
+  delivery
 })

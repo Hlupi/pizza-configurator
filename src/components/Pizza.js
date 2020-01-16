@@ -5,7 +5,7 @@ import TweenMax, { Cubic, Back, Elastic, Bounce, Circ, SteppedEase } from 'gsap'
 const SVG = styled.svg`
   width: ${({ size }) => size ? `${size}px` : 0};
   @media(max-width: 389px) {
-    width: ${({ size }) => `calc(${size}px - 60px)`};
+    width: ${({ size }) => 0.8 * size}px;
   }
 `
 
@@ -13,6 +13,7 @@ const Group = styled.g`
     opacity: ${({ visible }) => visible ? 1 : 0};
     transition: opacity .5s linear;
 `
+
 
 const Pizza = ({ size, toppings }) => {
   const check = (ingredient) => new RegExp(`\\b${ingredient}`, 'img').test(toppings)

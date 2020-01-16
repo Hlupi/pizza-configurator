@@ -1,41 +1,31 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { bases } from '../data'
 import { addBase } from '../actions/index'
-import { baseCost } from '../PizzaOptionsPrices'
-import { Legend } from './fragments/form-elements'
+import Fieldset from './fragments/form-elements'
 import Select from './fragments/select'
 
 
-const baseTypes = [
-  '20cm NY Style',
-  '25cm NY Style',
-  '30cm NY Style',
-  '35cm NY Style',
-]
+const Base = ({ addBase }) => {
 
-const Base = props => {
   const handleChange = event => {
-    props.addBase(event.target.value)
+    addBase(event.target.value)
   }
 
-  const renderBaseSizes = baseTypes.map((size, i) => {
+  const renderBaseSizes = bases.map((base, i) => {
     return (
-      <Select key={i} type="radio" price={`€${baseCost[size].toFixed(2)}`} value={size} onChange={handleChange} name="base" label={size} />
+      <Select key={i} type="radio" price={`€${base.price.toFixed(2)}`} value={base.name} onChange={handleChange} name="base" label={base.name} />
     )
   })
+
   return (
-    <fieldset>
-      <Legend>Pick the base</Legend>
-      {renderBaseSizes}
-    </fieldset>
+    <>
+      <Fieldset legend="Pick the base">
+        {renderBaseSizes}
+      </Fieldset>
+    </>
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    pizza: state.pizza,
-  }
-}
-
-export default connect(mapStateToProps, { addBase })(Base)
+export default connect(null, { addBase })(Base)

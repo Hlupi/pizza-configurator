@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -11,7 +11,6 @@ import Left from './fragments/left'
 import Right from './fragments/right'
 
 const Container = styled.section`
-  margin-bottom: 20px;
   padding: 20px;
   & > svg {
     display: block;
@@ -20,8 +19,7 @@ const Container = styled.section`
 
   @media (min-width: 640px) {
     padding: 40px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 40px auto;
     max-width: 640px;
     border-radius: 5px;
     box-shadow: 10px 10px 20px #614030;
@@ -51,6 +49,7 @@ const Button = styled.button`
   }
 
   & > svg {
+    ${({ disabled }) => disabled && 'fill: #cfcfcf'};
     width: 30%;
   }
 `
@@ -89,11 +88,10 @@ const Card = styled.div`
   }
 `
 
+
 const PizzaContainer = ({ size, toppings }) => {
   const [active, setActive] = useState(0)
   const [translate, setTranslate] = useState(0)
-  const slider = useRef()
-
 
   const slideLeft = () => {
     setActive(active - 1)
@@ -106,10 +104,12 @@ const PizzaContainer = ({ size, toppings }) => {
   }
 
   const arrowControls = e => {
-    if (e.keyCode == '39' && maySlideRight) {
+    if (e.keyCode === 39 && maySlideRight) {
+      e.preventDefault()
       slideRight()
     }
-    if (e.keyCode == '37' && maySlideLeft) {
+    if (e.keyCode === 37 && maySlideLeft) {
+      e.preventDefault()
       slideLeft()
     }
   }
@@ -121,14 +121,18 @@ const PizzaContainer = ({ size, toppings }) => {
     }
   })
 
-  const children = [<Base />, <Toppings />, <Sauce />, <Price />]
+  const children = [<Base />, <Sauce />, <Toppings />, <Price />]
   const numOfchildren = children.length
   const maySlideRight = active < numOfchildren - 1
   const maySlideLeft = active > 0
   const renderCards = children.map((child, i) => {
+    const activeSlide = active === i
     return (
-      <Slide key={i} step={i + 1} active={active === i}>
-        <Card>{child}</Card>
+      <Slide key={i} step={i + 1} active={activeSlide}>
+        <Card>{React.cloneElement(
+          child,
+          { active: activeSlide }
+        )}</Card>
       </Slide>
     )
   })
@@ -138,18 +142,18 @@ const PizzaContainer = ({ size, toppings }) => {
       <header>
         <h1>Mix and match and then you buy</h1>
       </header>
-      <Pizza size={size * 10} toppings={toppings} />
+      <Pizza size={size * 10} toppings={toppings.map(t=> t.name)} />
       <Wrapper>
         {maySlideLeft && (
           <Button onClick={slideLeft} style={{ left: 0 }}>
             <Left />
           </Button>
         )}
-        <Slider style={{ transform: `translateX(${translate}%)` }} ref={slider}>
+        <Slider style={{ transform: `translateX(${translate}%)` }}>
           {renderCards}
         </Slider>
         {maySlideRight && (
-          <Button onClick={slideRight} style={{ right: 0 }}>
+          <Button onClick={slideRight} style={{ right: 0 }} disabled={!size}>
             <Right />
           </Button>
         )}
@@ -160,8 +164,8 @@ const PizzaContainer = ({ size, toppings }) => {
 
 const mapStateToProps = state => {
   return {
-    size: state.pizza.base && state.pizza.base.slice(0, 2),
-    toppings: state.pizza.topping
+    size: state.base && state.base.name.slice(0, 2),
+    toppings: state.toppings
   }
 }
 
