@@ -23,7 +23,7 @@ const Delivery = props => {
   })
 
   return (
-    <Fieldset legend="Add turbo delivery?" special>
+    <Fieldset legend="Add turbo drone delivery?" special>
       {renderDeliveryOptions}
     </Fieldset>
   )
