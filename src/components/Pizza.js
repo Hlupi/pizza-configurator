@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import TweenMax, { Cubic, Back, Elastic, Bounce, Circ, SteppedEase } from 'gsap'
 
 const SVG = styled.svg`
   width: ${({ size }) => size ? `${size}px` : 0};
+  transition: width 0.25s linear;
   @media(max-width: 389px) {
     width: ${({ size }) => 0.8 * size}px;
   }
@@ -14,8 +16,12 @@ const Group = styled.g`
     transition: opacity .5s linear;
 `
 
+const Sauce = styled.path`
+  transition: fill .5s linear;
+`
 
-const Pizza = ({ size, toppings }) => {
+
+const Pizza = ({ size, sauce, toppings }) => {
   const check = (ingredient) => new RegExp(`\\b${ingredient}`, 'img').test(toppings)
   const animateSalami = () => {
     TweenMax.from("#salami", { y: -200, duration: 1, ease: Cubic.easeIn })
@@ -105,12 +111,33 @@ const Pizza = ({ size, toppings }) => {
     corn && animateCorn()
   }, [corn])
 
+  const sauceChoice = sauce => {
+    switch (sauce) {
+      case 'White sauce':
+        return '#FCF7ED' ;
+      case 'Red sauce': 
+        return '#FF7058';
+      case 'Double red sauce': 
+        return '#ff4726'
+      case 'Mix it up':
+        return 'url(#sauce-mix)'
+        default:
+        return '#FF7058';
+    }
+  }
+
   return (
-    <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" size={size} style={{ transition: 'width 0.25s linear' }} role="img">
+    <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" size={size} role="img">
+      <defs>
+        <linearGradient id="sauce-mix" x1="21.757%" x2="75.253%" y1="50%" y2="50%">
+          <stop offset="0%" stopColor="#FF7058" />
+          <stop offset="100%" stopColor="#FCF7ED" />
+        </linearGradient>
+      </defs>
         <g id="pizza">
           <g id="base">
             <circle id="Oval" cx="178.5" cy="178.5" r="178.5" fill="#FFD15C" />
-            <path id="Shape" fill="#FF7058" fillRule="nonzero" d="M179.5 338C91.868 338 21 267.134 21 179.5 21 91.868 91.868 21 179.5 21 267.134 21 338 91.868 338 179.5c0 87.634-70.866 158.5-158.5 158.5zm.734-300.857c-79.155 0-143.091 63.935-143.091 143.091 0 79.155 63.935 143.091 143.091 143.091 79.155 0 143.091-63.934 143.091-143.09S259.391 37.142 180.235 37.142z" />
+            <Sauce id="Shape" fill={sauceChoice(sauce)} fillRule="nonzero" d="M179.5 338C91.868 338 21 267.134 21 179.5 21 91.868 91.868 21 179.5 21 267.134 21 338 91.868 338 179.5c0 87.634-70.866 158.5-158.5 158.5zm.734-300.857c-79.155 0-143.091 63.935-143.091 143.091 0 79.155 63.935 143.091 143.091 143.091 79.155 0 143.091-63.934 143.091-143.09S259.391 37.142 180.235 37.142z" />
           </g>
           <Group id="tomatoes" transform="translate(49 52)" visible={tomatoes}>
             <g id="Group" transform="rotate(-22 62.771 -183.91)">
@@ -963,4 +990,12 @@ const Pizza = ({ size, toppings }) => {
   )
 }
 
-export default Pizza
+const mapStateToProps = state => {
+  return {
+    size: state.base && state.base.name.slice(0, 2) * 10,
+    sauce: state.sauce.name,
+    toppings: state.toppings.map(t => t.name)
+  }
+}
+
+export default connect(mapStateToProps)(Pizza)

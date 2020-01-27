@@ -89,7 +89,7 @@ const Card = styled.div`
 `
 
 
-const PizzaContainer = ({ size, toppings }) => {
+const PizzaContainer = ({ base }) => {
   const [active, setActive] = useState(0)
   const [translate, setTranslate] = useState(0)
 
@@ -138,11 +138,11 @@ const PizzaContainer = ({ size, toppings }) => {
   })
 
   return (
-    <Container pizzaSize={size}>
+    <Container>
       <header>
         <h1>Mix and match and then you buy</h1>
       </header>
-      <Pizza size={size * 10} toppings={toppings.map(t=> t.name)} />
+      <Pizza />
       <Wrapper>
         {maySlideLeft && (
           <Button onClick={slideLeft} style={{ left: 0 }}>
@@ -153,7 +153,7 @@ const PizzaContainer = ({ size, toppings }) => {
           {renderCards}
         </Slider>
         {maySlideRight && (
-          <Button onClick={slideRight} style={{ right: 0 }} disabled={!size}>
+          <Button onClick={slideRight} style={{ right: 0 }} disabled={!base}>
             <Right />
           </Button>
         )}
@@ -164,8 +164,7 @@ const PizzaContainer = ({ size, toppings }) => {
 
 const mapStateToProps = state => {
   return {
-    size: state.base && state.base.name.slice(0, 2),
-    toppings: state.toppings
+    base: state.base && state.base.name.slice(0, 2)
   }
 }
 
