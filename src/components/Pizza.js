@@ -62,7 +62,7 @@ const Pizza = ({ size, sauce, toppings }) => {
   const animateCorn = () => {
     TweenMax.from("#corn", { y: -200, duration: 1.5, ease: SteppedEase.config(6) })
   }
-  
+
   const tomatoes = check('tomatoes')
   const salami = check('salami')
   const mushrooms = check('mushrooms')
@@ -79,7 +79,7 @@ const Pizza = ({ size, sauce, toppings }) => {
   }, [salami])
 
   useEffect(() => {
-    mushrooms && animateM1() 
+    mushrooms && animateM1()
     mushrooms && animateM2()
   }, [mushrooms])
 
@@ -115,9 +115,9 @@ const Pizza = ({ size, sauce, toppings }) => {
     switch (sauce) {
       case 'White sauce':
         return '#FCF7ED' ;
-      case 'Red sauce': 
+      case 'Red sauce':
         return '#FF7058';
-      case 'Double red sauce': 
+      case 'Double red sauce':
         return '#ff4726'
       case 'Mix it up':
         return 'url(#sauce-mix)'
@@ -129,15 +129,17 @@ const Pizza = ({ size, sauce, toppings }) => {
   return (
     <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 357 357" size={size} role="img">
       <defs>
-        <linearGradient id="sauce-mix" x1="21.757%" x2="75.253%" y1="50%" y2="50%">
-          <stop offset="0%" stopColor="#FF7058" />
-          <stop offset="100%" stopColor="#FCF7ED" />
+        <linearGradient id="sauce-mix" x1="100%" x2="0%" y1="50.881%" y2="50%">
+          <stop offset="0%" stopColor="#FFF" />
+          <stop offset="49.554%" stopColor="#FFE5E0" />
+          <stop offset="50.823%" stopColor="#FFAA9C" />
+          <stop offset="100%" stopColor="#FF7058" />
         </linearGradient>
       </defs>
         <g id="pizza">
           <g id="base">
             <circle id="Oval" cx="178.5" cy="178.5" r="178.5" fill="#FFD15C" />
-            <Sauce id="Shape" fill={sauceChoice(sauce)} fillRule="nonzero" d="M179.5 338C91.868 338 21 267.134 21 179.5 21 91.868 91.868 21 179.5 21 267.134 21 338 91.868 338 179.5c0 87.634-70.866 158.5-158.5 158.5zm.734-300.857c-79.155 0-143.091 63.935-143.091 143.091 0 79.155 63.935 143.091 143.091 143.091 79.155 0 143.091-63.934 143.091-143.09S259.391 37.142 180.235 37.142z" />
+          <Sauce fill={sauceChoice(sauce)} fillRule="nonzero" d="M179.5 338C91.868 338 21 267.134 21 179.5 21 91.868 91.868 21 179.5 21 267.134 21 338 91.868 338 179.5c0 87.634-70.866 158.5-158.5 158.5z" />
           </g>
           <Group id="tomatoes" transform="translate(49 52)" visible={tomatoes}>
             <g id="Group" transform="rotate(-22 62.771 -183.91)">
